@@ -4,18 +4,20 @@
       <v-col cols="12">
         <TypeScheduleRadioButton :pName="pName" :pCanModify="pCanModify" />
       </v-col>
-      <v-col cols="12">
-
+      <v-col cols="12" id="hours" >
+        <HoursInput  v-for="(value, day) in pSchedule.schedule" :key="day" :data="value" :day="day"  />
+      </v-col>
+      <v-col>
       </v-col>
     </v-row>
-
   </v-form>
 </template>
 
 <script>
 import  TypeScheduleRadioButton from '@/components/TypeScheduleRadioButton'
+import HoursInput from '@/components/HoursInput'
 export default {
-  components:{TypeScheduleRadioButton},
+  components:{TypeScheduleRadioButton,HoursInput},
 name: "Schedule",
   props:{
     id:{
@@ -42,32 +44,19 @@ name: "Schedule",
       required:false,
       default:''
     },
-    pRadioLabels:{
+    pSchedule:{
       type:Object,
-      required:false,
-      default: function() {
-        return {
-          alwaysOpen:{
-            label:'always open',
-            hint: 'parks, beaches, streets',
-            value: 'always_open'
-          },
-          selectedHours:{
-            label:'open on selected hours',
-            hint: 'input your own hours',
-            value:'selected_hours'
-          }
-        }
-      }
+      required:true
     },
     pCanModify:{
       required:true,
       type:Boolean,
     },
-    pSchedule:{
-      type:Object,
-      required:true,
-    }
+  },
+  computed:{
+    scheduleData(){
+      return this.$store.getters['schedule/getSchedule']
+    },
   },
 }
 </script>
