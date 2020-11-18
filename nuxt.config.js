@@ -1,6 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
+const routerBase = process.env.DEPLOY_ENV === 'gh-pages' ? {
+  router: {
+    base: '/TimeScheduleForm/'
+  }
+} : {}
 
 export default {
+  ...routerBase,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - forms',
