@@ -2,11 +2,13 @@
   <v-form>
     <v-row>
       <v-col cols="12">
-        <TypeScheduleRadioButton :pName="pName" :pCanModify="pCanModify" />
+        <TypeScheduleRadioButton  :pName="pName" :pCanModify="pCanModify" />
       </v-col>
-      <v-col cols="12" id="hours" >
-        <HoursInput  v-for="(value, day) in pSchedule.schedule" :key="day" :data="value" :day="day"  />
-      </v-col>
+      <v-scroll-y-transition mode="out-in">
+        <v-col v-if="!getAlwaysOpen" cols="12" id="hours">
+            <HoursInput  v-for="(value, day) in pSchedule.schedule" :key="day" :data="value" :day="day"  />
+        </v-col>
+        </v-scroll-y-transition>
       <v-col>
       </v-col>
     </v-row>
@@ -57,6 +59,9 @@ name: "Schedule",
     scheduleData(){
       return this.$store.getters['schedule/getSchedule']
     },
+    getAlwaysOpen(){
+      return this.$store.getters['schedule/getAlwaysOpen']
+    }
   },
 }
 </script>

@@ -1,6 +1,7 @@
 export default () => ({
+  pCanModify: true,
   pSchedule:{
-    alwaysOpen:false,
+    alwaysOpen: true,
     schedule:{
       monday:{
         opening: '',
@@ -31,8 +32,12 @@ export default () => ({
         closing:''
       },
     },
-  }
-
-
-
+  },
+  id:'',
+  pEnabled:'' ,
+  pRemarks:'',
+  p24hs:'',
+  pFirstDay:'',
+  pName:'test name',
+  showSchedule:false,
 })
